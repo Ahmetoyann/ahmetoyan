@@ -25,13 +25,14 @@ function App() {
       uni1: "Balıkesir Üniversitesi",
       dept: "Bilgisayar Mühendisliği Bölümü",
       uni2: "Harran Üniversitesi",
+      gpa: "Not Ortalaması : 2.44/4.00",
       skillsTitle: "Uzmanlık Alanları",
       skillsList: ["Flutter&Mobil Uygulama Geliştirme (Flutter, Dart)", "Web Geliştirme (React, Node.js)", "Veritabanı Yönetimi (Firebase)"],
       langTitle: "Diller",
       langList: ["Türkçe (Anadil)", "İngilizce (Temel Seviye)", "Arapca (Temel Seviye)"],
       expTitle: "Deneyim",
       jobs: [
-        { title: "TeknoAI-T", details: "Uzaktan Çalışan | Ocak 2026 - Hala Çalışıyor", desc: "Burada deneyimlerinizle ilgili detaylı açıklamalar yer alacak. Hangi projelerde çalıştınız, hangi teknolojileri kullandınız ve takıma ne gibi katkılar sağladınız?" },
+        { title: "TeknoAI-T", details: "Uzaktan Çalışan | Ocak 2026 - Hala Çalışıyor", desc: "TeknoAI-T şirketinde çalışmaya devam ediyorum." },
         { title: "İşkur Gençlik Programı", details: "Tam Zamanlı Çalışan | Mart 2025 - Temmuz 2025", desc: "Balıkesir Üniversitesi rektörlüğünde bulunan Bilgi İşlem Daire Başkanlığında tam zamanlı olarak görev yaptım.\nBu sayede web sitesi ile alakalı çeşitli deneyimler kazandım." }
       ],
       volTitle: "Gönüllülük",
@@ -72,13 +73,14 @@ function App() {
       uni1: "Balikesir University",
       dept: "Computer Engineering Department",
       uni2: "Harran University",
+      gpa: "GPA : 2.44/4.00",
       skillsTitle: "Skills",
       skillsList: ["Flutter & Mobile App Development (Flutter, Dart)", "Web Development (React, Node.js)", "Database Management (Firebase)"],
       langTitle: "Languages",
       langList: ["Turkish (Native)", "English (Basic Level)", "Arabic (Basic Level)"],
       expTitle: "Experience",
       jobs: [
-        { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "" },
+        { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "I continue to work at TeknoAI-T company." },
         { title: "Iskur Youth Program", details: "Full Time | Mar 2025 - Jul 2025", desc: "I worked full time at the IT Department of Balikesir University Rectorate.\nThanks to this, I gained various experiences related to websites." }
       ],
       volTitle: "Volunteering",
@@ -243,6 +245,212 @@ function App() {
           opacity: 1;
           visibility: visible;
         }
+
+        /* Hakkımda Bölümü Kart Stilleri */
+        .info-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 25px;
+          margin-top: 30px;
+        }
+        .info-item {
+          background-color: #fff;
+          border-radius: 15px;
+          padding: 25px;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.05);
+          height: 100%;
+        }
+        .dark-mode .info-item {
+          background-color: #2d2d2d;
+          border-color: rgba(255,255,255,0.1);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .info-item:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .info-item .subtitle {
+          color: #007bff;
+          border-bottom: 2px solid #eee;
+          padding-bottom: 10px;
+          margin-bottom: 15px;
+        }
+
+        /* Deneyim ve Gönüllülük Kart Stilleri */
+        .experience-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+          margin-top: 30px;
+        }
+        .experience-item {
+          background-color: #fff;
+          border-radius: 15px;
+          padding: 25px;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.05);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        .dark-mode .experience-item {
+          background-color: #2d2d2d;
+          border-color: rgba(255,255,255,0.1);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .experience-item:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .experience-item .job-title {
+          color: #007bff;
+          font-size: 1.3rem;
+          margin-bottom: 5px;
+          margin-top: 0;
+        }
+        .experience-item .job-details {
+          font-size: 0.95rem;
+          color: #666;
+          margin-bottom: 15px;
+          font-weight: 500;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 10px;
+        }
+        .dark-mode .experience-item .job-details {
+          color: #aaa;
+          border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        /* Projeler Kart Stilleri */
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+          margin-top: 30px;
+        }
+        .project-card {
+          background-color: #fff;
+          border-radius: 15px;
+          padding: 25px;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.05);
+          height: 100%;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+        }
+        .dark-mode .project-card {
+          background-color: #2d2d2d;
+          border-color: rgba(255,255,255,0.1);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .project-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .project-card h4 {
+          color: #007bff;
+          font-size: 1.3rem;
+          margin-top: 0;
+          margin-bottom: 10px;
+        }
+        .project-card p {
+          color: #666;
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+        .dark-mode .project-card p {
+          color: #aaa;
+        }
+
+        /* İletişim Formu Stilleri */
+        .form-group {
+          margin-bottom: 20px;
+        }
+        .form-group label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 500;
+          color: #555;
+        }
+        .dark-mode .form-group label {
+          color: #ccc;
+        }
+        .form-input, .form-textarea {
+          width: 100%;
+          padding: 15px;
+          border-radius: 15px;
+          border: 1px solid rgba(0,0,0,0.1);
+          background-color: #f9f9f9;
+          font-size: 1rem;
+          transition: all 0.3s ease;
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+          font-family: inherit;
+          box-sizing: border-box;
+        }
+        .dark-mode .form-input, .dark-mode .form-textarea {
+          background-color: #333;
+          border-color: rgba(255,255,255,0.1);
+          color: #fff;
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .form-input:focus, .form-textarea:focus {
+          outline: none;
+          border-color: #007bff;
+          background-color: #fff;
+          box-shadow: 0 0 0 4px rgba(0,123,255,0.1);
+        }
+        .dark-mode .form-input:focus, .dark-mode .form-textarea:focus {
+          background-color: #2d2d2d;
+        }
+        .form-submit-btn {
+          background-color: #007bff;
+          color: white;
+          border: none;
+          padding: 15px;
+          border-radius: 15px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          width: 100%;
+          box-shadow: 0 4px 10px rgba(0,123,255,0.2);
+          margin-top: 10px;
+        }
+        .form-submit-btn:hover {
+          background-color: #0056b3;
+          transform: translateY(-3px);
+          box-shadow: 0 6px 15px rgba(0,123,255,0.3);
+        }
+
+        /* Kart Başlıkları ve İkonlar */
+        .card-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 15px;
+          border-bottom: 2px solid #eee;
+          padding-bottom: 10px;
+        }
+        .dark-mode .card-header {
+          border-bottom-color: rgba(255,255,255,0.1);
+        }
+        .card-icon {
+          font-size: 1.5rem;
+          display: flex;
+          align-items: center;
+        }
+        .info-item .subtitle, 
+        .experience-item .job-title,
+        .project-card h4 {
+          border-bottom: none;
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
       `}</style>
       
       {/* Overlay */}
@@ -298,7 +506,10 @@ function App() {
         <p className="about-text">{t.aboutText}</p>
         <div className="info-grid">
           <div className="info-item">
-            <h4 className="subtitle">{t.eduTitle}</h4>
+            <div className="card-header">
+              <span className="card-icon">🎓</span>
+              <h4 className="subtitle">{t.eduTitle}</h4>
+            </div>
             <p><strong>{t.uni1}</strong></p>
             <p>{t.dept}</p>
             <p className="date">2024 - 2025</p>
@@ -306,15 +517,22 @@ function App() {
             <p><strong>{t.uni2}</strong></p>
             <p>{t.dept}</p>
             <p className="date">2025 - 2028</p>
+            <p><strong>{t.gpa}</strong></p>
           </div>
           <div className="info-item">
-            <h4 className="subtitle">{t.skillsTitle}</h4>
+            <div className="card-header">
+              <span className="card-icon">🛠️</span>
+              <h4 className="subtitle">{t.skillsTitle}</h4>
+            </div>
             <ul className="list">
               {t.skillsList.map((skill, index) => <li key={index}>{skill}</li>)}
             </ul>
           </div>
           <div className="info-item">
-            <h4 className="subtitle">{t.langTitle}</h4>
+            <div className="card-header">
+              <span className="card-icon">🌍</span>
+              <h4 className="subtitle">{t.langTitle}</h4>
+            </div>
             <ul className="list">
               {t.langList.map((lang, index) => <li key={index}>{lang}</li>)}
             </ul>
@@ -325,26 +543,36 @@ function App() {
       {/* Deneyim Kısmı */}
       <section id="experience" className="section">
         <h3 className="section-title">{t.expTitle}</h3>
-        {t.jobs.map((job, index) => (
-          <div key={index} className="experience-item">
-            <h4 className="job-title">{job.title}</h4>
-            <p className="job-details">{job.details}</p>
-            <p className="job-desc" style={{ whiteSpace: 'pre-line' }}>{job.desc}</p>
-          </div>
-        ))}
+        <div className="experience-grid">
+          {t.jobs.map((job, index) => (
+            <div key={index} className="experience-item">
+              <div className="card-header">
+                <span className="card-icon">💼</span>
+                <h4 className="job-title">{job.title}</h4>
+              </div>
+              <p className="job-details">{job.details}</p>
+              <p className="job-desc" style={{ whiteSpace: 'pre-line' }}>{job.desc}</p>
+            </div>
+          ))}
+        </div>
         {/* Başka deneyimler buraya eklenebilir */}
       </section>
 
       {/* Gönüllülük Kısmı */}
       <section id="volunteering" className="section">
         <h3 className="section-title">{t.volTitle}</h3>
-        {t.volJobs.map((job, index) => (
-          <div key={index} className="experience-item">
-            <h4 className="job-title">{job.title}</h4>
-            <p className="job-details">{job.details}</p>
-            <p className="job-desc" style={{ whiteSpace: 'pre-line' }}>{job.desc}</p>
-          </div>
-        ))}
+        <div className="experience-grid">
+          {t.volJobs.map((job, index) => (
+            <div key={index} className="experience-item">
+              <div className="card-header">
+                <span className="card-icon">🤝</span>
+                <h4 className="job-title">{job.title}</h4>
+              </div>
+              <p className="job-details">{job.details}</p>
+              <p className="job-desc" style={{ whiteSpace: 'pre-line' }}>{job.desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Öne Çıkan Projeler */}
@@ -353,7 +581,10 @@ function App() {
         <div className="projects-grid">
           {projects.map((project) => (
             <div key={project.id} className="project-card" onClick={() => setSelectedProject(project)}>
-              <h4 style={{ marginTop: '0' }}>{project.title}</h4>
+              <div className="card-header">
+                <span className="card-icon">🚀</span>
+                <h4>{project.title}</h4>
+              </div>
               <p>{project.description}</p>
             </div>
           ))}
