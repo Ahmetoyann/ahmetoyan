@@ -8,6 +8,7 @@ function App() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [showContactModal, setShowContactModal] = useState(false);
   const [language, setLanguage] = useState('en');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const translations = {
     tr: {
@@ -77,7 +78,7 @@ function App() {
       langList: ["Turkish (Native)", "English (Basic Level)", "Arabic (Basic Level)"],
       expTitle: "Experience",
       jobs: [
-        { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "Detailed explanations about your experiences will be here. Which projects did you work on, which technologies did you use and what contributions did you make to the team?" },
+        { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "" },
         { title: "Iskur Youth Program", details: "Full Time | Mar 2025 - Jul 2025", desc: "I worked full time at the IT Department of Balikesir University Rectorate.\nThanks to this, I gained various experiences related to websites." }
       ],
       volTitle: "Volunteering",
@@ -90,7 +91,7 @@ function App() {
           id: 1,
           title: "Pazaryeri (Flutter)",
           description: "Mobile application providing neighborhood markets, product search and occupancy management. Developed using MVVM architecture, Provider, Firebase Auth/Firestore and Location services.",
-          githubLink: "https://github.com/Ahmetoyann/Pazaryeri"
+          githubLink: "https://github.com/Ahmetoyann/Pazaryeri/blob/main/README.md"
         }
       ],
       contactTitle: "Get in Touch",
@@ -132,23 +133,148 @@ function App() {
 
   return (
     <div className="container">
+      <style>{`
+        .hamburger-btn {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          z-index: 1002;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .hamburger-btn span {
+          display: block;
+          width: 30px;
+          height: 3px;
+          background-color: #333;
+          border-radius: 3px;
+          transition: all 0.3s ease;
+        }
+        .dark-mode .hamburger-btn span {
+          background-color: #fff;
+        }
+        .hamburger-btn.open span:nth-child(1) {
+          transform: rotate(45deg) translate(7px, 6px);
+        }
+        .hamburger-btn.open span:nth-child(2) {
+          opacity: 0;
+        }
+        .hamburger-btn.open span:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        .navbar {
+          position: fixed;
+          top: 0;
+          right: -300px;
+          width: 250px;
+          height: 100vh;
+          background-color: rgba(255, 255, 255, 0.98);
+          box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+          transition: right 0.3s ease;
+          z-index: 1001;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 20px;
+        }
+        .dark-mode .navbar {
+          background-color: rgba(30, 30, 30, 0.98);
+        }
+        .navbar.open {
+          right: 0;
+        }
+        .nav-list {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 25px;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .nav-link {
+          text-decoration: none;
+          color: #333;
+          font-size: 1.2rem;
+          font-weight: 500;
+          position: relative;
+          transition: color 0.3s ease;
+        }
+        .dark-mode .nav-link {
+          color: #f0f0f0;
+        }
+        .nav-link:hover {
+          color: #007bff;
+        }
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: -5px;
+          left: 0;
+          background-color: #007bff;
+          transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+          width: 100%;
+        }
+        .menu-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0,0,0,0.5);
+          z-index: 1000;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(5px);
+          -webkit-backdrop-filter: blur(5px);
+        }
+        .menu-overlay.open {
+          opacity: 1;
+          visibility: visible;
+        }
+      `}</style>
       
+      {/* Overlay */}
+      <div className={`menu-overlay ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(false)}></div>
+
+      {/* Hamburger Button */}
+      <button 
+        className={`hamburger-btn ${menuOpen ? 'open' : ''}`} 
+        onClick={() => setMenuOpen(!menuOpen)}
+        aria-label="Menüyü Aç/Kapat"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       {/* Navigasyon Menüsü */}
-      <nav className="navbar">
+      <nav className={`navbar ${menuOpen ? 'open' : ''}`}>
         <ul className="nav-list">
-          <li><a href="#home" className="nav-link">{t.navHome}</a></li>
-          <li><a href="#about" className="nav-link">{t.navAbout}</a></li>
-          <li><a href="#experience" className="nav-link">{t.navExp}</a></li>
-          <li><a href="#volunteering" className="nav-link">{t.navVol}</a></li>
-          <li><a href="#projects" className="nav-link">{t.navProj}</a></li>
-          <li><a href="#contact" className="nav-link">{t.navContact}</a></li>
+          <li><a href="#home" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navHome}</a></li>
+          <li><a href="#about" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navAbout}</a></li>
+          <li><a href="#experience" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navExp}</a></li>
+          <li><a href="#volunteering" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navVol}</a></li>
+          <li><a href="#projects" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navProj}</a></li>
+          <li><a href="#contact" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navContact}</a></li>
           <li>
-            <button onClick={() => setDarkMode(!darkMode)} className="theme-btn" aria-label="Karanlık Modu Değiştir">
+            <button onClick={() => { setDarkMode(!darkMode); setMenuOpen(false); }} className="theme-btn" aria-label="Karanlık Modu Değiştir">
               {darkMode ? '☀️' : '🌙'}
             </button>
           </li>
           <li>
-            <button onClick={() => setLanguage(language === 'tr' ? 'en' : 'tr')} className="theme-btn" style={{ marginLeft: '10px', fontSize: '0.9rem', fontWeight: 'bold' }}>
+            <button onClick={() => { setLanguage(language === 'tr' ? 'en' : 'tr'); setMenuOpen(false); }} className="theme-btn" style={{ marginLeft: '10px', fontSize: '0.9rem', fontWeight: 'bold' }}>
               {language === 'tr' ? 'EN' : 'TR'}
             </button>
           </li>
