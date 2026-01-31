@@ -14,6 +14,7 @@ function App() {
       navHome: "Ana Sayfa",
       navAbout: "Hakkımda",
       navExp: "Deneyim",
+      navVol: "Gönüllülük",
       navProj: "Projeler",
       navContact: "İletişim",
       headerTitle: "Bilgisayar Mühendisliği Öğrencisi",
@@ -31,6 +32,10 @@ function App() {
       jobs: [
         { title: "TeknoAI-T", details: "Uzaktan Çalışan | Ocak 2026 - Hala Çalışıyor", desc: "Burada deneyimlerinizle ilgili detaylı açıklamalar yer alacak. Hangi projelerde çalıştınız, hangi teknolojileri kullandınız ve takıma ne gibi katkılar sağladınız?" },
         { title: "İşkur Gençlik Programı", details: "Tam Zamanlı Çalışan | Mart 2025 - Temmuz 2025", desc: "Balıkesir Üniversitesi rektörlüğünde bulunan Bilgi İşlem Daire Başkanlığında tam zamanlı olarak görev yaptım.\nBu sayede web sitesi ile alakalı çeşitli deneyimler kazandım." }
+      ],
+      volTitle: "Gönüllülük",
+      volJobs: [
+        { title: "T3 Vakfı", details: "Gönüllü | Eyl 2025 - Halen", desc: "Şanlıurfa T3 Vakfında gönüllü olarak çalışmaktayım." }
       ],
       projTitle: "Öne Çıkan Projeler",
       projects: [
@@ -56,6 +61,7 @@ function App() {
       navHome: "Home",
       navAbout: "About",
       navExp: "Experience",
+      navVol: "Volunteering",
       navProj: "Projects",
       navContact: "Contact",
       headerTitle: "Computer Engineering Student",
@@ -73,6 +79,10 @@ function App() {
       jobs: [
         { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "Detailed explanations about your experiences will be here. Which projects did you work on, which technologies did you use and what contributions did you make to the team?" },
         { title: "Iskur Youth Program", details: "Full Time | Mar 2025 - Jul 2025", desc: "I worked full time at the IT Department of Balikesir University Rectorate.\nThanks to this, I gained various experiences related to websites." }
+      ],
+      volTitle: "Volunteering",
+      volJobs: [
+        { title: "T3 Foundation", details: "Volunteer | Sep 2025 - Present", desc: "I work as a volunteer at the Şanlıurfa T3 Foundation." }
       ],
       projTitle: "Featured Projects",
       projects: [
@@ -129,6 +139,7 @@ function App() {
           <li><a href="#home" className="nav-link">{t.navHome}</a></li>
           <li><a href="#about" className="nav-link">{t.navAbout}</a></li>
           <li><a href="#experience" className="nav-link">{t.navExp}</a></li>
+          <li><a href="#volunteering" className="nav-link">{t.navVol}</a></li>
           <li><a href="#projects" className="nav-link">{t.navProj}</a></li>
           <li><a href="#contact" className="nav-link">{t.navContact}</a></li>
           <li>
@@ -196,6 +207,18 @@ function App() {
           </div>
         ))}
         {/* Başka deneyimler buraya eklenebilir */}
+      </section>
+
+      {/* Gönüllülük Kısmı */}
+      <section id="volunteering" className="section">
+        <h3 className="section-title">{t.volTitle}</h3>
+        {t.volJobs.map((job, index) => (
+          <div key={index} className="experience-item">
+            <h4 className="job-title">{job.title}</h4>
+            <p className="job-details">{job.details}</p>
+            <p className="job-desc" style={{ whiteSpace: 'pre-line' }}>{job.desc}</p>
+          </div>
+        ))}
       </section>
 
       {/* Öne Çıkan Projeler */}
