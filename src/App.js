@@ -46,6 +46,12 @@ function App() {
           title: "Pazaryeri (Flutter)",
           description: "Semt pazarları, ürün arama ve doluluk yönetimi sağlayan mobil uygulama. MVVM mimarisi, Provider, Firebase Auth/Firestore ve Konum servisleri kullanılarak geliştirilmiştir.",
           githubLink: "https://github.com/Ahmetoyann/Pazaryeri"
+        },
+        {
+          id: 2,
+          title: "OYN Müzik (Flutter)",
+          description: "Müzik dinleyip keşfedebileceğiniz, modern ve kullanıcı dostu bir müzik çalma uygulaması. Trendler, gelişmiş arama, arka planda çalma, favoriler, çalma listeleri, bulut senkronizasyonu ve kişiselleştirme gibi özellikler sunar. Flutter, Firebase Auth/Firestore, Provider, just_audio & audio_service, Jamendo API ve shared_preferences kullanılarak geliştirilmiştir.",
+          githubLink: "https://github.com/Ahmetoyann/oynmusic"
         }
       ],
       contactTitle: "İletişime Geçin",
@@ -93,7 +99,13 @@ function App() {
           id: 1,
           title: "Pazaryeri (Flutter)",
           description: "Mobile application providing neighborhood markets, product search and occupancy management. Developed using MVVM architecture, Provider, Firebase Auth/Firestore and Location services.",
-          githubLink: "https://github.com/Ahmetoyann/Pazaryeri/blob/main/README.md"
+          githubLink: "https://github.com/Ahmetoyann/Pazaryeri"
+        },
+        {
+          id: 2,
+          title: "OYN Müzik (Flutter)",
+          description: "A modern and user-friendly music player application where you can listen to and discover music. Offers features such as trends, advanced search, background playback, favorites, playlists, cloud synchronization, and personalization. Developed using Flutter, Firebase Auth/Firestore, Provider, just_audio & audio_service, Jamendo API, and shared_preferences.",
+          githubLink: "https://github.com/Ahmetoyann/oynmusic"
         }
       ],
       contactTitle: "Get in Touch",
