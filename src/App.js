@@ -27,12 +27,12 @@ function App() {
       uni2: "Harran Üniversitesi",
       gpa: "Not Ortalaması : 2.44/4.00",
       skillsTitle: "Uzmanlık Alanları",
-      skillsList: ["Flutter&Mobil Uygulama Geliştirme (Flutter, Dart)", "Web Geliştirme (React, Node.js)", "Veritabanı Yönetimi (Firebase)"],
+      skillsList: ["Flutter&Mobil Uygulama Geliştirme (Flutter, Dart)", "Web Geliştirme (React, javascript, HTML, CSS, Node.js)", "Veritabanı Yönetimi (Firebase)"],
       langTitle: "Diller",
       langList: ["Türkçe (Anadil)", "İngilizce (Temel Seviye)", "Arapca (Temel Seviye)"],
       expTitle: "Deneyim",
       jobs: [
-        { title: "TeknoAI-T", details: "Uzaktan Çalışan | Ocak 2026 - Hala Çalışıyor", desc: "TeknoAI-T şirketinde çalışmaya devam ediyorum." },
+        { title: "TeknoAI-T", details: "Uzaktan Çalışan | Ocak 2026 - Hala Çalışıyor", desc: "TeknoAI-T’de çalışmaya başladım ve teknoloji odaklı projelerde öğrenme isteğimle hızlı şekilde katkı sağlamaya odaklanıyorum." },
         { title: "İşkur Gençlik Programı", details: "Tam Zamanlı Çalışan | Mart 2025 - Temmuz 2025", desc: "Balıkesir Üniversitesi rektörlüğünde bulunan Bilgi İşlem Daire Başkanlığında tam zamanlı olarak görev yaptım.\nBu sayede web sitesi ile alakalı çeşitli deneyimler kazandım." }
       ],
       volTitle: "Gönüllülük",
@@ -49,7 +49,7 @@ function App() {
         },
         {
           id: 2,
-          title: "OYN Müzik (Flutter)",
+          title: "OYN Music (Flutter)",
           description: "Müzik dinleyip keşfedebileceğiniz, modern ve kullanıcı dostu bir müzik çalma uygulaması. Trendler, gelişmiş arama, arka planda çalma, favoriler, çalma listeleri, bulut senkronizasyonu ve kişiselleştirme gibi özellikler sunar. Flutter, Firebase Auth/Firestore, Provider, just_audio & audio_service, Jamendo API ve shared_preferences kullanılarak geliştirilmiştir.",
           githubLink: "https://github.com/Ahmetoyann/oynmusic"
         }
@@ -81,12 +81,12 @@ function App() {
       uni2: "Harran University",
       gpa: "GPA : 2.44/4.00",
       skillsTitle: "Skills",
-      skillsList: ["Flutter & Mobile App Development (Flutter, Dart)", "Web Development (React, Node.js)", "Database Management (Firebase)"],
+      skillsList: ["Flutter & Mobile App Development (Flutter, Dart)", "Web Development (React, javascript, HTML, CSS, Node.js)", "Database Management (Firebase)"],
       langTitle: "Languages",
       langList: ["Turkish (Native)", "English (Basic Level)", "Arabic (Basic Level)"],
       expTitle: "Experience",
       jobs: [
-        { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "I continue to work at TeknoAI-T company." },
+        { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "I started working at TeknoAI-T and I'm focused on quickly contributing to technology-oriented projects with my eagerness to learn." },
         { title: "Iskur Youth Program", details: "Full Time | Mar 2025 - Jul 2025", desc: "I worked full time at the IT Department of Balikesir University Rectorate.\nThanks to this, I gained various experiences related to websites." }
       ],
       volTitle: "Volunteering",
@@ -103,7 +103,7 @@ function App() {
         },
         {
           id: 2,
-          title: "OYN Müzik (Flutter)",
+          title: "OYN Music (Flutter)",
           description: "A modern and user-friendly music player application where you can listen to and discover music. Offers features such as trends, advanced search, background playback, favorites, playlists, cloud synchronization, and personalization. Developed using Flutter, Firebase Auth/Firestore, Provider, just_audio & audio_service, Jamendo API, and shared_preferences.",
           githubLink: "https://github.com/Ahmetoyann/oynmusic"
         }
