@@ -1,8 +1,127 @@
 import { useState, useEffect } from 'react';
 import profilePic from './image/VesikalıkFotoğraf.jpeg';
 import './styles.css';
+import AdminPanel from './admin_panel_page';
+
+// Varsayılan içerik (Eski translations objesi buraya taşındı)
+const defaultContent = {
+  tr: {
+    navHome: "Ana Sayfa",
+    navAbout: "Hakkımda",
+    navExp: "Deneyim",
+    navVol: "Gönüllülük",
+    navProj: "Projeler",
+    navContact: "İletişim",
+    headerTitle: "Bilgisayar Mühendisliği Öğrencisi",
+    aboutTitle: "Hakkımda",
+    aboutText: "Bilgisayar Mühendisliği öğrencisi olarak özellikle mobil uygulama geliştirme alanında kendimi geliştirmeye odaklanmış, öğrenmeye açık ve güçlü bir problem çözme yaklaşımına sahip biriyim. Yeni teknolojileri hızlıca kavrayabilen, azimli ve yüksek motivasyonla çalışan biri olarak ekip çalışmalarına uyum sağlayacağıma inanıyorum.",
+    eduTitle: "Eğitim",
+    uni1: "Balıkesir Üniversitesi",
+    dept: "Bilgisayar Mühendisliği Bölümü",
+    uni2: "Harran Üniversitesi",
+    gpa: "Not Ortalaması : 2.44/4.00",
+    skillsTitle: "Uzmanlık Alanları",
+    skillsList: ["Flutter&Mobil Uygulama Geliştirme (Flutter, Dart)", "Web Geliştirme (React, Node.js)", "Veritabanı Yönetimi (Firebase)"],
+    langTitle: "Diller",
+    langList: ["Türkçe (Anadil)", "İngilizce (Temel Seviye)", "Arapca (Temel Seviye)"],
+    expTitle: "Deneyim",
+    jobs: [
+      { title: "TeknoAI-T", details: "Uzaktan Çalışan | Ocak 2026 - Hala Çalışıyor", desc: "TeknoAI-T şirketinde çalışmaya devam ediyorum." },
+      { title: "İşkur Gençlik Programı", details: "Tam Zamanlı Çalışan | Mart 2025 - Temmuz 2025", desc: "Balıkesir Üniversitesi rektörlüğünde bulunan Bilgi İşlem Daire Başkanlığında tam zamanlı olarak görev yaptım.\nBu sayede web sitesi ile alakalı çeşitli deneyimler kazandım." }
+    ],
+    volTitle: "Gönüllülük",
+    volJobs: [
+      { title: "T3 Vakfı", details: "Gönüllü | Eyl 2025 - Halen", desc: "Şanlıurfa T3 Vakfında gönüllü olarak çalışmaktayım." }
+    ],
+    projTitle: "Öne Çıkan Projeler",
+    projects: [
+      {
+        id: 1,
+        title: "Pazaryeri (Flutter)",
+        description: "Semt pazarları, ürün arama ve doluluk yönetimi sağlayan mobil uygulama. MVVM mimarisi, Provider, Firebase Auth/Firestore ve Konum servisleri kullanılarak geliştirilmiştir.",
+        githubLink: "https://github.com/Ahmetoyann/Pazaryeri"
+      },
+      {
+        id: 2,
+        title: "OYN Music (Flutter)",
+        description: "Müzik dinleyip keşfedebileceğiniz, modern ve kullanıcı dostu bir müzik çalma uygulaması. Trendler, gelişmiş arama, arka planda çalma, favoriler, çalma listeleri, bulut senkronizasyonu ve kişiselleştirme gibi özellikler sunar. Flutter, Firebase Auth/Firestore, Provider, just_audio & audio_service, Jamendo API ve shared_preferences kullanılarak geliştirilmiştir.",
+        githubLink: "https://github.com/Ahmetoyann/oynmusic"
+      }
+    ],
+    contactTitle: "İletişime Geçin",
+    copyright: "Tüm Hakları Saklıdır.",
+    modalTitle: "İletişime Geçin",
+    formName: "Ad Soyad",
+    formEmail: "E-posta",
+    formMsg: "Mesaj",
+    formBtn: "Gönder",
+    phName: "Adınız Soyadınız",
+    phEmail: "ornek@email.com",
+    phMsg: "Mesajınız..."
+  },
+  en: {
+    navHome: "Home",
+    navAbout: "About",
+    navExp: "Experience",
+    navVol: "Volunteering",
+    navProj: "Projects",
+    navContact: "Contact",
+    headerTitle: "Computer Engineering Student",
+    aboutTitle: "About Me",
+    aboutText: "As a Computer Engineering student, I am focused on improving myself in mobile application development, open to learning, and have a strong problem-solving approach. I believe I will adapt to team work as someone who can grasp new technologies quickly, works with determination and high motivation.",
+    eduTitle: "Education",
+    uni1: "Balikesir University",
+    dept: "Computer Engineering Department",
+    uni2: "Harran University",
+    gpa: "GPA : 2.44/4.00",
+    skillsTitle: "Skills",
+    skillsList: ["Flutter & Mobile App Development (Flutter, Dart)", "Web Development (React, Node.js)", "Database Management (Firebase)"],
+    langTitle: "Languages",
+    langList: ["Turkish (Native)", "English (Basic Level)", "Arabic (Basic Level)"],
+    expTitle: "Experience",
+    jobs: [
+      { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "I continue to work at TeknoAI-T company." },
+      { title: "Iskur Youth Program", details: "Full Time | Mar 2025 - Jul 2025", desc: "I worked full time at the IT Department of Balikesir University Rectorate.\nThanks to this, I gained various experiences related to websites." }
+    ],
+    volTitle: "Volunteering",
+    volJobs: [
+      { title: "T3 Foundation", details: "Volunteer | Sep 2025 - Present", desc: "I work as a volunteer at the Şanlıurfa T3 Foundation." }
+    ],
+    projTitle: "Featured Projects",
+    projects: [
+      {
+        id: 1,
+        title: "Pazaryeri (Flutter)",
+        description: "Mobile application providing neighborhood markets, product search and occupancy management. Developed using MVVM architecture, Provider, Firebase Auth/Firestore and Location services.",
+        githubLink: "https://github.com/Ahmetoyann/Pazaryeri"
+      },
+      {
+        id: 2,
+        title: "OYN Music (Flutter)",
+        description: "A modern and user-friendly music player application where you can listen to and discover music. Offers features such as trends, advanced search, background playback, favorites, playlists, cloud synchronization, and personalization. Developed using Flutter, Firebase Auth/Firestore, Provider, just_audio & audio_service, Jamendo API, and shared_preferences.",
+        githubLink: "https://github.com/Ahmetoyann/oynmusic"
+      }
+    ],
+    contactTitle: "Get in Touch",
+    copyright: "All Rights Reserved.",
+    modalTitle: "Get in Touch",
+    formName: "Name Surname",
+    formEmail: "Email",
+    formMsg: "Message",
+    formBtn: "Send",
+    phName: "Your Name",
+    phEmail: "example@email.com",
+    phMsg: "Your message..."
+  }
+};
 
 function App() {
+  // İçeriği LocalStorage'dan çek, yoksa varsayılanı kullan
+  const [content, setContent] = useState(() => {
+    const saved = localStorage.getItem('siteContent');
+    return saved ? JSON.parse(saved) : defaultContent;
+  });
+
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -10,118 +129,7 @@ function App() {
   const [language, setLanguage] = useState('en');
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const translations = {
-    tr: {
-      navHome: "Ana Sayfa",
-      navAbout: "Hakkımda",
-      navExp: "Deneyim",
-      navVol: "Gönüllülük",
-      navProj: "Projeler",
-      navContact: "İletişim",
-      headerTitle: "Bilgisayar Mühendisliği Öğrencisi",
-      aboutTitle: "Hakkımda",
-      aboutText: "Bilgisayar Mühendisliği öğrencisi olarak özellikle mobil uygulama geliştirme alanında kendimi geliştirmeye odaklanmış, öğrenmeye açık ve güçlü bir problem çözme yaklaşımına sahip biriyim. Yeni teknolojileri hızlıca kavrayabilen, azimli ve yüksek motivasyonla çalışan biri olarak ekip çalışmalarına uyum sağlayacağıma inanıyorum.",
-      eduTitle: "Eğitim",
-      uni1: "Balıkesir Üniversitesi",
-      dept: "Bilgisayar Mühendisliği Bölümü",
-      uni2: "Harran Üniversitesi",
-      gpa: "Not Ortalaması : 2.44/4.00",
-      skillsTitle: "Uzmanlık Alanları",
-      skillsList: ["Flutter&Mobil Uygulama Geliştirme (Flutter, Dart)", "Web Geliştirme (React, javascript, HTML, CSS, Node.js)", "Veritabanı Yönetimi (Firebase)"],
-      langTitle: "Diller",
-      langList: ["Türkçe (Anadil)", "İngilizce (Temel Seviye)", "Arapca (Temel Seviye)"],
-      expTitle: "Deneyim",
-      jobs: [
-        { title: "TeknoAI-T", details: "Uzaktan Çalışan | Ocak 2026 - Hala Çalışıyor", desc: "TeknoAI-T’de çalışmaya başladım ve teknoloji odaklı projelerde öğrenme isteğimle hızlı şekilde katkı sağlamaya odaklanıyorum." },
-        { title: "İşkur Gençlik Programı", details: "Tam Zamanlı Çalışan | Mart 2025 - Temmuz 2025", desc: "Balıkesir Üniversitesi rektörlüğünde bulunan Bilgi İşlem Daire Başkanlığında tam zamanlı olarak görev yaptım.\nBu sayede web sitesi ile alakalı çeşitli deneyimler kazandım." }
-      ],
-      volTitle: "Gönüllülük",
-      volJobs: [
-        { title: "T3 Vakfı", details: "Gönüllü | Eyl 2025 - Halen", desc: "Şanlıurfa T3 Vakfında gönüllü olarak çalışmaktayım." }
-      ],
-      projTitle: "Öne Çıkan Projeler",
-      projects: [
-        {
-          id: 1,
-          title: "Pazaryeri (Flutter)",
-          description: "Semt pazarları, ürün arama ve doluluk yönetimi sağlayan mobil uygulama. MVVM mimarisi, Provider, Firebase Auth/Firestore ve Konum servisleri kullanılarak geliştirilmiştir.",
-          githubLink: "https://github.com/Ahmetoyann/Pazaryeri"
-        },
-        {
-          id: 2,
-          title: "OYN Music (Flutter)",
-          description: "Müzik dinleyip keşfedebileceğiniz, modern ve kullanıcı dostu bir müzik çalma uygulaması. Trendler, gelişmiş arama, arka planda çalma, favoriler, çalma listeleri, bulut senkronizasyonu ve kişiselleştirme gibi özellikler sunar. Flutter, Firebase Auth/Firestore, Provider, just_audio & audio_service, Jamendo API ve shared_preferences kullanılarak geliştirilmiştir.",
-          githubLink: "https://github.com/Ahmetoyann/oynmusic"
-        }
-      ],
-      contactTitle: "İletişime Geçin",
-      copyright: "Tüm Hakları Saklıdır.",
-      modalTitle: "İletişime Geçin",
-      formName: "Ad Soyad",
-      formEmail: "E-posta",
-      formMsg: "Mesaj",
-      formBtn: "Gönder",
-      phName: "Adınız Soyadınız",
-      phEmail: "ornek@email.com",
-      phMsg: "Mesajınız..."
-    },
-    en: {
-      navHome: "Home",
-      navAbout: "About",
-      navExp: "Experience",
-      navVol: "Volunteering",
-      navProj: "Projects",
-      navContact: "Contact",
-      headerTitle: "Computer Engineering Student",
-      aboutTitle: "About Me",
-      aboutText: "As a Computer Engineering student, I am focused on improving myself in mobile application development, open to learning, and have a strong problem-solving approach. I believe I will adapt to team work as someone who can grasp new technologies quickly, works with determination and high motivation.",
-      eduTitle: "Education",
-      uni1: "Balikesir University",
-      dept: "Computer Engineering Department",
-      uni2: "Harran University",
-      gpa: "GPA : 2.44/4.00",
-      skillsTitle: "Skills",
-      skillsList: ["Flutter & Mobile App Development (Flutter, Dart)", "Web Development (React, javascript, HTML, CSS, Node.js)", "Database Management (Firebase)"],
-      langTitle: "Languages",
-      langList: ["Turkish (Native)", "English (Basic Level)", "Arabic (Basic Level)"],
-      expTitle: "Experience",
-      jobs: [
-        { title: "TeknoAI-T", details: "Remote | Jan 2026 - Present", desc: "I started working at TeknoAI-T and I'm focused on quickly contributing to technology-oriented projects with my eagerness to learn." },
-        { title: "Iskur Youth Program", details: "Full Time | Mar 2025 - Jul 2025", desc: "I worked full time at the IT Department of Balikesir University Rectorate.\nThanks to this, I gained various experiences related to websites." }
-      ],
-      volTitle: "Volunteering",
-      volJobs: [
-        { title: "T3 Foundation", details: "Volunteer | Sep 2025 - Present", desc: "I work as a volunteer at the Şanlıurfa T3 Foundation." }
-      ],
-      projTitle: "Featured Projects",
-      projects: [
-        {
-          id: 1,
-          title: "Pazaryeri (Flutter)",
-          description: "Mobile application providing neighborhood markets, product search and occupancy management. Developed using MVVM architecture, Provider, Firebase Auth/Firestore and Location services.",
-          githubLink: "https://github.com/Ahmetoyann/Pazaryeri"
-        },
-        {
-          id: 2,
-          title: "OYN Music (Flutter)",
-          description: "A modern and user-friendly music player application where you can listen to and discover music. Offers features such as trends, advanced search, background playback, favorites, playlists, cloud synchronization, and personalization. Developed using Flutter, Firebase Auth/Firestore, Provider, just_audio & audio_service, Jamendo API, and shared_preferences.",
-          githubLink: "https://github.com/Ahmetoyann/oynmusic"
-        }
-      ],
-      contactTitle: "Get in Touch",
-      copyright: "All Rights Reserved.",
-      modalTitle: "Get in Touch",
-      formName: "Name Surname",
-      formEmail: "Email",
-      formMsg: "Message",
-      formBtn: "Send",
-      phName: "Your Name",
-      phEmail: "example@email.com",
-      phMsg: "Your message..."
-    }
-  };
-
-  const t = translations[language];
+  const t = content[language];
   const projects = t.projects;
 
   useEffect(() => {
@@ -148,114 +156,101 @@ function App() {
   return (
     <div className="container">
       <style>{`
+        /* Masaüstünde Hamburger Menüyü Gizle */
         .hamburger-btn {
-          position: fixed;
-          top: 20px;
-          right: 20px;
-          z-index: 1002;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          padding: 10px;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
+          display: none;
         }
-        .hamburger-btn span {
-          display: block;
-          width: 30px;
-          height: 3px;
-          background-color: #333;
-          border-radius: 3px;
-          transition: all 0.3s ease;
-        }
-        .dark-mode .hamburger-btn span {
-          background-color: #fff;
-        }
-        .hamburger-btn.open span:nth-child(1) {
-          transform: rotate(45deg) translate(7px, 6px);
-        }
-        .hamburger-btn.open span:nth-child(2) {
-          opacity: 0;
-        }
-        .hamburger-btn.open span:nth-child(3) {
-          transform: rotate(-45deg) translate(7px, -6px);
-        }
-        
-        .navbar {
-          position: fixed;
-          top: 0;
-          right: -300px;
-          width: 250px;
-          height: 100vh;
-          background-color: rgba(255, 255, 255, 0.98);
-          box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-          transition: right 0.3s ease;
-          z-index: 1001;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          padding: 20px;
-        }
-        .dark-mode .navbar {
-          background-color: rgba(30, 30, 30, 0.98);
-        }
-        .navbar.open {
-          right: 0;
-        }
-        .nav-list {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 25px;
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        .nav-link {
-          text-decoration: none;
-          color: #333;
-          font-size: 1.2rem;
-          font-weight: 500;
-          position: relative;
-          transition: color 0.3s ease;
-        }
-        .dark-mode .nav-link {
-          color: #f0f0f0;
-        }
-        .nav-link:hover {
-          color: #007bff;
-        }
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          width: 0;
-          height: 2px;
-          bottom: -5px;
-          left: 0;
-          background-color: #007bff;
-          transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-          width: 100%;
-        }
-        .menu-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0,0,0,0.5);
-          z-index: 1000;
-          opacity: 0;
-          visibility: hidden;
-          transition: all 0.3s ease;
-          backdrop-filter: blur(5px);
-          -webkit-backdrop-filter: blur(5px);
-        }
-        .menu-overlay.open {
-          opacity: 1;
-          visibility: visible;
+
+        /* Sadece Mobil Cihazlar İçin Stiller */
+        @media (max-width: 768px) {
+          .hamburger-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1002;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+          }
+          .hamburger-btn span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: var(--text-primary);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+          }
+          .hamburger-btn.open span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 6px);
+          }
+          .hamburger-btn.open span:nth-child(2) {
+            opacity: 0;
+          }
+          .hamburger-btn.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+          }
+          
+          .navbar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--bg-container);
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            border-left: 1px solid var(--border-color);
+          }
+          .navbar.open {
+            right: 0;
+          }
+          .nav-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .nav-link {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+          }
+          .nav-link:hover {
+            color: var(--accent-color);
+          }
+          .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+          }
+          .menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+          }
         }
 
         /* Hakkımda Bölümü Kart Stilleri */
@@ -647,6 +642,14 @@ function App() {
           ⬆
         </button>
       )}
+
+      <AdminPanel 
+        content={content} 
+        setContent={setContent} 
+        defaultContent={defaultContent} 
+        currentLanguage={language}
+        darkMode={darkMode}
+      />
 
       {/* Modal (Açılır Pencere) */}
       {selectedProject && (
