@@ -416,7 +416,7 @@ export default function AdminPanel({ content, setContent, defaultContent, curren
                       setIsSidebarOpen(false);
                     }}
                   >
-                    Diğer
+                    Diğer 
                   </a>
                 )}
               </div>
