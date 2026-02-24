@@ -3,6 +3,12 @@ import profilePic from './image/VesikalıkFotoğraf.jpeg';
 import './styles.css';
 import AdminPanel from './admin_panel_page';
 
+// Sertifika Görselleri
+import cert1 from './image/WhatsApp Image 2026-02-24 at 11.33.33.jpeg';
+import cert2 from './image/Ekran görüntüsü 2026-02-20 143152.png';
+import cert3 from './image/Ekran görüntüsü 2026-02-20 143130.png';
+import cert4 from './image/Ekran görüntüsü 2026-01-27 171439.png';
+
 // Varsayılan içerik (Eski translations objesi buraya taşındı)
 const defaultContent = {
   tr: {
@@ -11,6 +17,7 @@ const defaultContent = {
     navExp: "Deneyim",
     navVol: "Gönüllülük",
     navProj: "Projeler",
+    navCert: "Sertifikalar",
     navContact: "İletişim",
     headerTitle: "Bilgisayar Mühendisliği Öğrencisi",
     aboutTitle: "Hakkımda",
@@ -48,6 +55,45 @@ const defaultContent = {
         githubLink: "https://github.com/Ahmetoyann/oynmusic"
       }
     ],
+    certTitle: "Sertifikalar",
+    certificates: [
+      {
+        id: 1,
+        title: "Project Writing Training",
+        issuer: "Öğrenci Kariyeri",
+        date: "Şubat 2026",
+        skills: "Yazılım Proje Yönetimi · Proje yazma · Project writing · Project management",
+        desc: "Öğrenci Kariyeri tarafından düzenlenen \"Project Writing Training Final\" programını başarıyla tamamladım.",
+        image: cert1
+      },
+      {
+        id: 2,
+        title: "Artificial Intelligence",
+        issuer: "İstanbul Gelişim Üniversitesi",
+        date: "Ocak 2026 - Şubat 2026",
+        skills: "Yapay Zeka · Yapay Zeka Destekli Geliştirme",
+        desc: "Yapay Zeka sertifikası.",
+        image: cert2
+      },
+      {
+        id: 3,
+        title: "Prompt Engineering",
+        issuer: "İstanbul Gelişim Üniversitesi",
+        date: "Ocak 2026 - Şubat 2026",
+        skills: "Prompt · Prompt Engineering",
+        desc: "Prompt Mühendisliği sertifikası.",
+        image: cert3
+      },
+      {
+        id: 4,
+        title: "Dart Programlama dili",
+        issuer: "BTK Akademi",
+        date: "Aralık 2025 - Ocak 2026",
+        skills: "Dart Dili",
+        desc: "BTK AKADEMİ'nin sunduğu Dart programlama dili eğitimini başarıyla tamamladım. Yeterlilik Kimliği: eK1hOn6Y4p",
+        image: cert4
+      }
+    ],
     contactTitle: "İletişime Geçin",
     copyright: "Tüm Hakları Saklıdır.",
     modalTitle: "İletişime Geçin",
@@ -65,6 +111,7 @@ const defaultContent = {
     navExp: "Experience",
     navVol: "Volunteering",
     navProj: "Projects",
+    navCert: "Certificates",
     navContact: "Contact",
     headerTitle: "Computer Engineering Student",
     aboutTitle: "About Me",
@@ -102,6 +149,45 @@ const defaultContent = {
         githubLink: "https://github.com/Ahmetoyann/oynmusic"
       }
     ],
+    certTitle: "Certificates",
+    certificates: [
+      {
+        id: 1,
+        title: "Project Writing Training",
+        issuer: "Öğrenci Kariyeri",
+        date: "February 2026",
+        skills: "Software Project Management · Project writing · Project management",
+        desc: "I am pleased to share that I have successfully completed the \"Project Writing Training Final\" program organized by Öğrenci Kariyeri.",
+        image: cert1
+      },
+      {
+        id: 2,
+        title: "Artificial Intelligence",
+        issuer: "Istanbul Gelisim University",
+        date: "January 2026 - February 2026",
+        skills: "Artificial Intelligence · AI Supported Development",
+        desc: "Artificial Intelligence certificate.",
+        image: cert2
+      },
+      {
+        id: 3,
+        title: "Prompt Engineering",
+        issuer: "Istanbul Gelisim University",
+        date: "January 2026 - February 2026",
+        skills: "Prompt · Prompt Engineering",
+        desc: "Prompt Engineering certificate.",
+        image: cert3
+      },
+      {
+        id: 4,
+        title: "Dart Programming Language",
+        issuer: "BTK Academy",
+        date: "December 2025 - January 2026",
+        skills: "Dart Language",
+        desc: "I have successfully completed the Dart programming language training provided by BTK ACADEMY. Credential ID: eK1hOn6Y4p",
+        image: cert4
+      }
+    ],
     contactTitle: "Get in Touch",
     copyright: "All Rights Reserved.",
     modalTitle: "Get in Touch",
@@ -119,7 +205,19 @@ function App() {
   // İçeriği LocalStorage'dan çek, yoksa varsayılanı kullan
   const [content, setContent] = useState(() => {
     const saved = localStorage.getItem('siteContent');
-    return saved ? JSON.parse(saved) : defaultContent;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        // Eksik alanları defaultContent'ten doldur
+        return {
+          tr: { ...defaultContent.tr, ...parsed.tr },
+          en: { ...defaultContent.en, ...parsed.en }
+        };
+      } catch {
+        return defaultContent;
+      }
+    }
+    return defaultContent;
   });
 
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -131,6 +229,7 @@ function App() {
 
   const t = content[language];
   const projects = t.projects;
+  const certificates = t.certificates;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -451,9 +550,79 @@ function App() {
           display: flex;
           align-items: center;
         }
+        /* Sertifikalar Kart Stilleri */
+        .certificates-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 25px;
+          margin-top: 30px;
+        }
+        .certificate-card {
+          background-color: #fff;
+          border-radius: 15px;
+          padding: 25px;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.05);
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+        .dark-mode .certificate-card {
+          background-color: #2d2d2d;
+          border-color: rgba(255,255,255,0.1);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .certificate-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .certificate-card h4 {
+          color: #007bff;
+          font-size: 1.2rem;
+          margin-top: 0;
+          margin-bottom: 5px;
+        }
+        .certificate-issuer {
+          font-weight: 600;
+          color: #444;
+          margin-bottom: 5px;
+        }
+        .dark-mode .certificate-issuer {
+          color: #ccc;
+        }
+        .certificate-date {
+          font-size: 0.9rem;
+          color: #777;
+          margin-bottom: 10px;
+        }
+        .dark-mode .certificate-date {
+          color: #aaa;
+        }
+        .certificate-skills {
+          font-size: 0.9rem;
+          color: #555;
+          margin-bottom: 15px;
+          font-style: italic;
+        }
+        .dark-mode .certificate-skills {
+          color: #bbb;
+        }
+        .certificate-img {
+          width: 100%;
+          height: auto;
+          border-radius: 10px;
+          margin-top: auto; /* Push to bottom */
+          border: 1px solid #eee;
+        }
+        .dark-mode .certificate-img {
+          border-color: #444;
+        }
+
         .info-item .subtitle, 
         .experience-item .job-title,
-        .project-card h4 {
+        .project-card h4,
+        .certificate-card h4 {
           border-bottom: none;
           padding-bottom: 0;
           margin-bottom: 0;
@@ -482,6 +651,7 @@ function App() {
           <li><a href="#experience" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navExp}</a></li>
           <li><a href="#volunteering" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navVol}</a></li>
           <li><a href="#projects" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navProj}</a></li>
+          <li><a href="#certificates" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navCert}</a></li>
           <li><a href="#contact" className="nav-link" onClick={() => setMenuOpen(false)}>{t.navContact}</a></li>
           <li>
             <button onClick={() => { setDarkMode(!darkMode); setMenuOpen(false); }} className="theme-btn" aria-label="Karanlık Modu Değiştir">
@@ -593,6 +763,28 @@ function App() {
                 <h4>{project.title}</h4>
               </div>
               <p>{project.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Sertifikalar Bölümü */}
+      <section id="certificates" className="section">
+        <h3 className="section-title">{t.certTitle}</h3>
+        <div className="certificates-grid">
+          {certificates.map((cert) => (
+            <div key={cert.id} className="certificate-card">
+              <div className="card-header">
+                <span className="card-icon">📜</span>
+                <h4>{cert.title}</h4>
+              </div>
+              <p className="certificate-issuer">{cert.issuer}</p>
+              <p className="certificate-date">{cert.date}</p>
+              <p className="certificate-skills">{cert.skills}</p>
+              <p style={{marginBottom: '10px'}}>{cert.desc}</p>
+              {cert.image && (
+                <img src={cert.image} alt={cert.title} className="certificate-img" />
+              )}
             </div>
           ))}
         </div>

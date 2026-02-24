@@ -2,12 +2,13 @@
 import { useState } from 'react';
 
 const SECTIONS = [
-  { id: 'nav', title: 'Navigasyon', keys: ['navHome', 'navAbout', 'navExp', 'navVol', 'navProj', 'navContact'] },
+  { id: 'nav', title: 'Navigasyon', keys: ['navHome', 'navAbout', 'navExp', 'navVol', 'navProj', 'navCert', 'navContact'] },
   { id: 'header', title: 'Üst Bilgi', keys: ['headerTitle', 'profileImg'] },
   { id: 'about', title: 'Hakkımda', keys: ['aboutTitle', 'aboutText', 'eduTitle', 'uni1', 'dept', 'uni2', 'gpa', 'skillsTitle', 'skillsList', 'langTitle', 'langList'] },
   { id: 'experience', title: 'Deneyim', keys: ['expTitle', 'jobs'] },
   { id: 'volunteering', title: 'Gönüllülük', keys: ['volTitle', 'volJobs'] },
   { id: 'projects', title: 'Projeler', keys: ['projTitle', 'projects'] },
+  { id: 'certificates', title: 'Sertifikalar', keys: ['certTitle', 'certificates'] },
   { id: 'contact', title: 'İletişim', keys: ['contactTitle', 'copyright', 'modalTitle', 'formName', 'formEmail', 'formMsg', 'formBtn', 'phName', 'phEmail', 'phMsg'] }
 ];
 
